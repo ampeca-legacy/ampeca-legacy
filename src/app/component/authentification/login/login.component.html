@@ -1,0 +1,18 @@
+<!-- <form  >
+    <label>email </label>
+    <input type="email" name="email" (input)="userInfo($event,'email')" id="email" placeholder="email">
+    <label>password </label>
+    <input #password type="password " name="password " (input)="userInfo($event,'password')" id="password " placeholder="password ">
+    <button routerLink="../signup" routerLinkActive="active">Create account</button>
+    <button  (click)="submit($event)" routerLinkActive="active" >Login</button>
+    <!-- <p>{{error}}</p> -->
+<!-- </form> --> 
+<div class="login">
+    <div class="form">
+      <h2>Welcome</h2>
+      <input  type="email" name="email" (input)="userInfo($event,'email')" id="email" placeholder="email">
+      <input #password type="password " name="password " (input)="userInfo($event,'password')" id="password " placeholder="password ">
+      <input (click)="submit($event)" routerLinkActive="active"  type="submit" value="Sign In" class="submit">
+        <button class="button" routerLink="../signup" routerLinkActive="active"  >Create Account</button>
+    </div>
+  </div>
