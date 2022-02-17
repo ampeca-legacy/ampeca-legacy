@@ -1,0 +1,15 @@
+<div>
+    <form>
+        <label>title</label>
+        <input type="text" name="title" placeholder="title">
+        <label>description</label>
+        <textarea name="description" placeholder="description" ></textarea>
+        <input type="file" (input)="onchange($event)">
+    </form>
+    <div>
+        <select>
+            <option value="">album name</option>
+        </select>
+    </div>
+    <button (click)="upload()">add</button>
+</div>

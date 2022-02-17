@@ -1,0 +1,17 @@
+body {
+  background-repeat: no-repeat;
+  background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a8630c5f-6e77-4132-ae49-efd987a44020/da6v7tp-301a4ab1-f045-42ff-a4db-0932eef93988.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2E4NjMwYzVmLTZlNzctNDEzMi1hZTQ5LWVmZDk4N2E0NDAyMFwvZGE2djd0cC0zMDFhNGFiMS1mMDQ1LTQyZmYtYTRkYi0wOTMyZWVmOTM5ODgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.7yi0ZxwCzXYPnZhrBWjiCZ0WGLh505od31ZaY7Qo-S8");
+}
+
+.container-audio {
+  bottom: 0;
+  position: fixed;
+  right: 0;
+   /* justify-content: center;
+   text-align: center; */
+}
+.playerfixed {
+   justify-content: center;
+   margin-right: 50px;
+   margin:auto;
+}
