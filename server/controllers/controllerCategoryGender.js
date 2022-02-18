@@ -3,17 +3,18 @@ var db = require("../DataBase/Connection.js");
 // Posting a Song in Playlist Is like Updating the array in the Playlist table For Specfic user
 
 var getGenders=(req,res)=>{ 
-    var sql = 'select gender from album'
+    var sql = 'select gender_album from album'
     db.query(sql, (err, rez) => {
         if (err)
             res.send(err);
         else{
+            // res.send(rez)
             var obj={}
             for (var i=0;i<rez.length;i++){
-                if (obj[rez[i]])
-                obj[rez[i]]++
+                if (obj[rez[i].gender_album])
+                obj[rez[i].gender_album]++
                 else{
-                    obj[rez[i]]=1
+                    obj[rez[i].gender_album]=1
                 }
             }
             var array=[]

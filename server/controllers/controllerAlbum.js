@@ -13,12 +13,12 @@ var getMusicFromAlbum = (req, res) => {
 var addAlbum = (req, res) => {
     var instsql = 'INSERT INTO album SET ?';
     var params = {
-        gender_album: req.body.gender,
-        category_album: req.body.category,
-        name_album: req.body.name,
-        cover_album: req.body.cover,
-        descr_album: req.body.descr,
-        id_user: req.body.userid
+        gender_album: req.body.gender_album,
+        category_album: req.body.category_album,
+        name_album: req.body.name_album,
+        cover_album: req.body.cover_album,
+        descr_album: req.body.descr_album,
+        id_user: req.body.id_user
     }
     db.query(instsql, params, (err, resl) => {
         if (err) {
@@ -63,7 +63,38 @@ var getAlbumsByUser = (req, res) => {
     })
 
 }
+var getAlbumByCategory=(req,res)=>{
+    var sql='select * from album'
+    db.query(sql, (err, rez) => {
+        if (err)
+            console.log(err)
+        else{  var obj={}
+        for (var i=0;i<rez.length;i++){
+            if (obj[rez[i].category_album])
+            obj[rez[i].category_album]++
+            else{
+                obj[rez[i].category_album]=1
+            }
+        }
+        var array=[]
+        for (var key in obj){
+            array.push(key)
+        }
+        res.send(array);
+    }      
+    })
+}
+var getallalbum=(req,res)=>{
+    var sql='select * from album'
+    db.query(sql, (err, rez) => {
+        if (err)
+            console.log(err)
+            else res.send(rez)}
+    )}
+
 module.exports = {
+    getallalbum,
+    getAlbumByCategory,
     getAlbumsByUser,
     addAlbum,
     updateAlbum,
