@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -13,9 +13,11 @@ export class NavComponent implements OnInit {
   searchdata:any={}
   options:any={}
   nextoptions:any={}
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+     console.log('huudcdsh',this.route.snapshot.paramMap.get("id"))
+    
   }
   onChange(event:any,id:string){
     this.placeholder=event.target.value
@@ -26,20 +28,20 @@ export class NavComponent implements OnInit {
     }
   search(){
     console.log(this.searchdata.search);
-    var that=this
-    this.options = {
+    // var that=this
+    // this.options = {
       
-        method: 'GET',
-        url: 'https://soundcloud4.p.rapidapi.com/search',
-        params: {query: this.searchdata.search, type: 'all'},
-        headers: {
-          'x-rapidapi-host': 'soundcloud4.p.rapidapi.com',
-          'x-rapidapi-key': 'c79f02db9bmshcd00effe8e3977cp1fe0cdjsn6981b3130ac2'
-        }
-      };
+    //     method: 'GET',
+    //     url: 'https://soundcloud4.p.rapidapi.com/search',
+    //     params: {query: this.searchdata.search, type: 'all'},
+    //     headers: {
+    //       'x-rapidapi-host': 'soundcloud4.p.rapidapi.com',
+    //       'x-rapidapi-key': 'c79f02db9bmshcd00effe8e3977cp1fe0cdjsn6981b3130ac2'
+    //     }
+    //   };
       
-      axios.request(this.options).then(function (response) {
-        console.log(response.data);
+      // axios.request(this.options).then(function (response) {
+      //   console.log(response.data);
         
         // that.nextoptions={
         //   method: 'GET',
@@ -61,8 +63,8 @@ export class NavComponent implements OnInit {
         // }).catch(function (error) {
         //   console.error(error);
         // });
-      }).catch(function (error) {
-        console.error(error);
-      });
+      // }).catch(function (error) {
+      //   console.error(error);
+      // });
 
 }}

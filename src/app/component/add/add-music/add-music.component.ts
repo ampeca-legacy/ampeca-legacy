@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
-
 import 'form-data'
 
 @Component({
@@ -11,8 +10,8 @@ import 'form-data'
 export class AddMusicComponent implements OnInit {
 
   constructor() { }
-music:any={}
-url_music:any=''
+   music:any={}
+   url_music:any=''
   ngOnInit(): void {
   }
   onchange(event:any){
@@ -20,8 +19,8 @@ url_music:any=''
     console.log(this.music);
   }
  
-      upload(){
-        const formData = new FormData();
+    upload(){
+      const formData = new FormData();
       formData.append("file", this.music);
       formData.append("upload_preset", "nt1uphup");
 

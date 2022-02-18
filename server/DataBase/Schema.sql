@@ -7,6 +7,7 @@ CREATE TABLE user (
     email varchar(200) , 
     password varchar(225),
     last_login datetime,
+     src varchar(2000),
     UNIQUE KEY email (email),
     PRIMARY KEY (id)
 )ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; ; 

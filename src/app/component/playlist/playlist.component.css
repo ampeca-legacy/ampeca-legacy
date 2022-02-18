@@ -1,3 +1,20 @@
-.myList{
-    color: aliceblue;
-}
+
+.center {
+    text-align: center;
+    color : white;
+    }
+
+    .button {
+        background-color: purple;
+        border: none;
+        color: white;
+        padding: 3px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
+    #white {
+        color:white;
+    }
