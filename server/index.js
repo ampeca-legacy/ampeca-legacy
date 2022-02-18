@@ -1,14 +1,24 @@
 var express = require('express');
-var routes = require('./routes/routes')
-var bodyParser = require('body-parser')
+
+var routesAlbum = require('./routes/routesAlbum')
+var routesUser=require('./routes/routesUser')
+var routesPlaylist=require('./routes/routesPlaylist')
+var routesMusic=require('./routes/routesMusic')
+var routesCategoryGender=require('./routes/routesCategoryGender')
+
+
 var app=express();
 
 const cors = require('cors');
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
 app.use(cors());
 app.use(express.json());
-app.use("/api",routes)
+
+app.use("/api/album",routesAlbum)
+app.use("/api/user",routesUser)
+app.use("/api/music",routesMusic)
+app.use("/api/playlist",routesPlaylist)
+app.use("/api/category",routesCategoryGender)
 
 
 

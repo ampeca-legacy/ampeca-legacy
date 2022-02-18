@@ -1,4 +1,3 @@
-/* Global Reset */
 * {
     font-family: 'Allerta', arial, Tahoma;
     box-sizing: border-box;
@@ -13,16 +12,15 @@ body {
 h3{
     text-shadow:1px 1px 1px #fff;
 }
-/* Start  styling the page */
 .container-audio {
     width: 66%;
     height: auto;
     padding: 20px;
     border-radius: 5px;
-    background-color: #eee;
+    background-color: rgb(204, 75, 172);
     color: #444;
     margin: 20px auto;
-    
+    margin-right: 200px;
     overflow: hidden;
 }
 audio {

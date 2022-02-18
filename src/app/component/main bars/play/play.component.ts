@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./play.component.css']
 })
 export class PlayComponent implements OnInit {
-  loggedin:boolean = false;
+  loggedin:boolean = true;
   constructor() { }
 
   ngOnInit(): void {
