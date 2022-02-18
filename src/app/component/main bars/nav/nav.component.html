@@ -1,0 +1,39 @@
+<!-- <div>
+    <nav class="flex">
+        <div class="inputnav"> 
+            <input type="search" placeholder="search" (input)="onChange($event,'search')">
+            <li><a routerLink="" (click)="search()" routerLinkActive="active">search</a></li>
+        </div>
+        <ul *ngIf="auth=== false">
+            <li><a routerLink="../login" routerLinkActive="active">Login</a></li>
+            <li><a routerLink="../signup" routerLinkActive="active">signup</a></li>
+        </ul> -->
+        <!-- *ngIf="auth=== true" -->
+        <!-- <ul >
+            <li><a routerLink="../profile" routerLinkActive="active">Profile</a></li>
+            <li><a routerLink="" routerLinkActive="active">Logout</a></li>
+        </ul>
+    </nav>
+    
+   
+</div> -->
+
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+<div class="wrapper">
+    <div class="box">
+        <form id='searchBox'>
+         <input placeholder='Search here...' type='text' (input)="onChange($event,'search')"/>
+         <input (click)="search()" id='submitBtn' type='submit' value='Search'/>
+        </form>
+        <span id='icon'><img src="square.png" alt=""></span>
+        <nav id='navArea'>
+         <ul class='navArea' *ngIf="auth=== false">
+            <li><a routerLink="../login" routerLinkActive="active">Login</a></li>
+            <li><a routerLink="../signup" routerLinkActive="active" >signup</a></li>
+            <li id='sub-menu'></li>
+            <li><a routerLink="../profile" routerLinkActive="active">Profile</a></li>
+            <li><a routerLink="../signup" routerLinkActive="active">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+</div>
