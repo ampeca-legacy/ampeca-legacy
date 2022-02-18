@@ -1,0 +1,29 @@
+
+<h1>playList</h1>
+<div class="center" >
+<label for="hero-name"> Add Playlist </label>
+    <input id="list-id" placeholder="name">
+    <button class="button" >add</button>
+
+
+    <div id="white" >Nothing has been added.</div>
+</div>
+    <div>
+    <ul class="myList">
+        <li *ngFor="let item of myList">
+            {{item.name}}
+        </li>
+        </ul>
+</div>
+<div>
+    <ul class="myList">
+        <li *ngFor="let item of myList">
+            <div class="listmusic" *ngFor="let mymusic of item.listmusic">
+              <p>{{mymusic.artistName}}</p> 
+              <p>{{mymusic.musicName}}</p>  
+            </div>
+        </li>
+        </ul>
+</div>
+
+
