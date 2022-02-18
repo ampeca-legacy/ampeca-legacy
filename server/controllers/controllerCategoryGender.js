@@ -35,7 +35,6 @@ var getAlbumsByGender=(req,res)=>{
         res.send(res)
     })
 }
-
 module.exports = {
     
     getGenders,

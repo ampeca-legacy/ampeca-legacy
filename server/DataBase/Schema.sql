@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS ampeca;
 CREATE DATABASE ampeca ; 
-USE ampeca
+USE ampeca;
 CREATE TABLE user (
     id_user int AUTO_INCREMENT ,
     username varchar (200),

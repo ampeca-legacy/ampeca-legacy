@@ -9,6 +9,7 @@ const register = function (req, res) {
     console.log(req.body)
     db.query(sql, [req.body.email], (err, result) => {
         if (err) {
+            console.log('ena');
             res.status(500).send(err)
         } else {
             if (result.length) {
@@ -22,6 +23,7 @@ const register = function (req, res) {
                         last_login: req.body.last_login,
                         image_user:req.body.image_user
                     }
+                    console.log(params)
                     db.query(`INSERT INTO user Set ? `
                         , params, (err, result) => {
                             if (err) {
