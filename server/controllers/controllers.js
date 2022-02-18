@@ -3,6 +3,7 @@ const {signupValidation, loginValidation} = require("./validation");
 const {validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
 const register = function (req, res) {
     var sql = 'SELECT * FROM user WHERE LOWER(email) = LOWER(?)'
     console.log(req.body)

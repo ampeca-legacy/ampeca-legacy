@@ -27,16 +27,13 @@
         </form>
         <span id='icon'><img src="square.png" alt=""></span>
         <nav id='navArea'>
-         <ul class='navArea'>
-             <li *ngIf="auth=== true" ><a routerLink="../profile" routerLinkActive="active" >Profile</a></li>
+         <ul class='navArea' *ngIf="auth=== false">
             <li><a routerLink="../login" routerLinkActive="active">Login</a></li>
             <li><a routerLink="../signup" routerLinkActive="active" >signup</a></li>
-            <li id='sub-menu'>
-               
-              
-            </li>
-            <li *ngIf="auth=== true" ><a   routerLink="" routerLinkActive="active" >Logout</a></li>
-         </ul>
+            <li id='sub-menu'></li>
+            <li><a routerLink="../profile" routerLinkActive="active">Profile</a></li>
+            <li><a routerLink="../signup" routerLinkActive="active">Logout</a></li>
+        </ul>
       </nav>
     </div>
 </div>

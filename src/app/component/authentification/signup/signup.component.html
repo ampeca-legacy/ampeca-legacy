@@ -9,28 +9,28 @@
             <span class="details">Full Name</span>
             <input type="text" id="name " name="name" (input)="onKey($event,'name')"  placeholder="Enter your name" required>
           </div>
-          <div class="input-box">
+          <!-- <div class="input-box">
             <span class="details">Username</span>
             <input type="text" placeholder="Enter your username" required>
-          </div>
+          </div> -->
           <div class="input-box">
             <span class="details">Email</span>
             <input name="email" id="email"(input)="onKey($event,'email')"  type="text" placeholder="Enter your email" required>
           </div>
-          <div class="input-box">
+          <!-- <div class="input-box">
             <span class="details">Phone Number</span>
             <input type="text" placeholder="Enter your number" required>
-          </div>
+          </div> -->
           <div class="input-box">
             <span class="details">Password</span>
             <input name="password " id="password "  (input)="onKey($event,'password')" type="text" placeholder="Enter your password" required>
           </div>
-          <div class="input-box">
+          <!-- <div class="input-box">
             <span class="details">Confirm Password</span>
             <input type="text" placeholder="Confirm your password" required>
-          </div>
+          </div> -->
         </div>
-        <div class="gender-details">
+        <!-- <div class="gender-details">
           <input type="radio" name="gender" id="dot-1">
           <input type="radio" name="gender" id="dot-2">
           <input type="radio" name="gender" id="dot-3">
@@ -49,7 +49,8 @@
             <span class="gender">Prefer not to say</span>
             </label>
           </div>
-        </div>
+        </div> -->
+        <input type="file" (input)="onchange($event)" name="file">
         <input type="date" (input)="onKey($event,'date')" name="date">
         <div class="button">
             <input type="submit" value="Register" (click)="on($event)"  routerLinkActive="active" />
