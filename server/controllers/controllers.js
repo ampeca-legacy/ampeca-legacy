@@ -18,8 +18,10 @@ const register = function (req, res) {
                      username:req.body.name,
                      email: req.body.email,
                      password:hash,
-                     last_login:req.body.date
+                     last_login:req.body.date,
+                     src:req.body.src
                    }
+                   console.log(params)
                     db.query(`INSERT INTO user Set ? `
                       , params ,(err, result) => {
                         if (err) {

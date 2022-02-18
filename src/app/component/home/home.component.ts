@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-home',
@@ -8,9 +8,11 @@ import { ActivatedRoute } from '@angular/router';
 
 export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
+ @Input() id=this.route.snapshot.paramMap.get("id");
 
   ngOnInit(): void {
     // console.log(this.route.snapshot.paramMap.get("id"))
+    
   }
 
  

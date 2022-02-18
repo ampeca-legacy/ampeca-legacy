@@ -13,7 +13,7 @@ import {PlaylistComponent} from './component/playlist/playlist.component';
 import { CategoryComponent } from './component/category/category.component';
 
 const routes: Routes = [
-  {path:'home', component:HomeComponent},
+  {path:'home/:id', component:HomeComponent},
   {path:'login', component:LoginComponent},
   {path:'playlist', component:PlaylistComponent},
   {path:'profile', component:ProfileComponent},
