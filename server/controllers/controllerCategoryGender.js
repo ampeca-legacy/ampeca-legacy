@@ -34,16 +34,9 @@ var getAlbumsByGender=(req,res)=>{
         res.send(res)
     })
 }
-var getAlbumsByCategory=(req,res)=>{
-    var sql='select category from album'
-    db.query(sql,(err,res)=>{
-        if (err)
-        console.log(err);
-    })
-}
 module.exports = {
     
     getGenders,
     getAlbumsByGender,
-    getAlbumsByCategory
+   
 };

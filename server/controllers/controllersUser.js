@@ -9,6 +9,7 @@ const register = function (req, res) {
     console.log(req.body)
     db.query(sql, [req.body.email], (err, result) => {
         if (err) {
+            console.log('ena');
             res.status(500).send(err)
         } else {
             if (result.length) {
@@ -16,11 +17,13 @@ const register = function (req, res) {
             } else
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     var params = {
-                        username: req.body.name,
+                        username: req.body.username,
                         email: req.body.email,
                         password: hash,
-                        last_login: req.body.date
+                        last_login: req.body.last_login,
+                        image_user:req.body.image_user
                     }
+                    console.log(params)
                     db.query(`INSERT INTO user Set ? `
                         , params, (err, result) => {
                             if (err) {
@@ -37,25 +40,28 @@ const register = function (req, res) {
 
 
 const login = (req, res, next) => {
-    params = req.body
+    var params = {
+        email:req.body.email,
+        password:req.body.password
+    }
     sql = 'SELECT * FROM user WHERE email =?'
-    db.query(sql, [params.email], (err, result) => { // user does not exists
+    db.query(sql,[req.body.email] , (err, result) => { // user does not exists
         if (err) {
-            res.status(400).send(err);
-        } else if (!result.length) {
-            res.status(401).send("Email or password is incorrect!");
-        } else {
-            bcrypt.compare(params.password, result[0]["password"], (bErr, bResult) => { // wrong password
-                if (bErr) {
-                    res.status(401).send("Email or password is incorrect!");
-                }
-                if (bResult) {
-                    res.status(200).send("Logged in!", result[0]);
-                } else {
-                    res.status(401).send("Username or password is incorrect!");
-                }
-            })
+            res.send(err);
+        } else{
+            if (!result.length) {
+                res.send("Email or password is incorrect!");
+            } else {
+                bcrypt.compare(params.password, result[0]["password"], (bErr, bResult) => { // wrong password
+                        if (bResult) {
+                            res.send(result[0]);
+                        } else {
+                            res.send("Username or password is incorrect!");
+                        }
+                })
+            }
         }
+         
     });
 };
 
@@ -109,12 +115,15 @@ const login = (req, res, next) => {
 //     });
 // };
 
+// Posting a Song in Playlist Is like Updating the array in the Playlist table For Specfic user
+
 const getUserInfo = (req, res) => { // const id=req.params.id
-    const userInfo = `SELECT * FROM user WHERE id = '${req.params["id_user"]
-        }'`;
-    db.db.query(userInfo, (err, data) => {
+console.log(req.params.id_user)
+    const userInfo = `SELECT * FROM user WHERE id_user = ${req.params["id_user"]}`;
+    db.query(userInfo, (err, data) => {
         if (err) {
             res.send(err);
+            console.log(err)
         } else {
             res.send(data);
         }

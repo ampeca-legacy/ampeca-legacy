@@ -3,7 +3,7 @@ var express = require('express');
 var routesAlbum = require('./routes/routesAlbum')
 var routesUser=require('./routes/routesUser')
 var routesPlaylist=require('./routes/routesPlaylist')
-var routesMusic=require('./routes/routesUser')
+var routesMusic=require('./routes/routesMusic')
 var routesCategoryGender=require('./routes/routesCategoryGender')
 
 
@@ -15,9 +15,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/album",routesAlbum)
-app.use("api/user",routesUser)
+app.use("/api/user",routesUser)
 app.use("/api/music",routesMusic)
-app.use("api/playlist",routesPlaylist)
+app.use("/api/playlist",routesPlaylist)
 app.use("/api/category",routesCategoryGender)
 
 

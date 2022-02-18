@@ -1,10 +1,12 @@
 <div class="login">
     <div class="form">
       <h2>Welcome</h2>
-      <input type="text" name="artist" placeholder="artist">
-      <input type="text" name="album" placeholder="album">
-      <input type="file">
-
+      <input  (input)="onKey($event,'gender_album')" type="text" name="gender_album" placeholder="album gender">
+      <input  (input)="onKey($event,'name_album')" type="text" name="name_album" placeholder="album name">
+      <input  (input)="onKey($event,'category_album')" type="text" name="category_album" placeholder="album category">
+      <textarea (input)="onKey($event,'descr_album')"name="descr_album"></textarea>
+      <input (input)="onchange($event)" type="file">
+      <button (click)="add($event)">add album</button>
 
     </div>
   </div>

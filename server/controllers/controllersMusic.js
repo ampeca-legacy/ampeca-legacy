@@ -1,8 +1,5 @@
 var db = require("../DataBase/Connection.js");
 
-// Getting The Array of Song for Specfic user
-
-// Posting a Song in Playlist Is like Updating the array in the Playlist table For Specfic user
 
 var PostMusic = function (req, res) {
     var lecture = "INSERT INTO music SET ?"
@@ -23,7 +20,7 @@ var PostMusic = function (req, res) {
 }
 
 var GetSong = function (req, res) {
-    db.query("SELECT * FROM song where id_music=?", req.params.id_music, (err, items, fields) => {
+    db.query("SELECT * FROM music where id_user=?", req.params.id_user, (err, items, fields) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -32,8 +29,9 @@ var GetSong = function (req, res) {
     });
 };
 
+// for home page
 var GetAllSong = function (req, res) {
-    db.db.query("SELECT * FROM music ", (err, rez) => {
+    db.query("SELECT * FROM music ", (err, rez) => {
         if (err)
             res.send(err);
         else
@@ -46,8 +44,9 @@ var GetAllSong = function (req, res) {
 // Posting a Song in Playlist Is like Updating the array in the Playlist table For Specfic user
 
 
-var GetAllSong = function (req, res) {
-    db.db.query("SELECT * FROM songs ", (err, rez) => {
+var GetsearchedSong = function (req, res) {
+
+    db.query("SELECT m.*,a.*,u.* FROM music m inner join album a on m.id_album=a.id_album inner join user u on u.id_user=m.id_user ", (err, rez) => {
         if (err)
             res.send(err);
         else
@@ -59,11 +58,9 @@ var GetAllSong = function (req, res) {
 
 
 
-module.exports = {
-    
+module.exports = {  
     PostMusic,
-
     GetSong,
-    
-    GetAllSong
+    GetAllSong,
+    GetsearchedSong
 };

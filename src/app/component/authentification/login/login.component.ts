@@ -10,7 +10,7 @@ import axios from 'axios'
 export class LoginComponent implements OnInit {
 
   constructor(private router: Router) { }
-  url='http://localhost:3000/api/login'
+  url='http://localhost:3000/api/user/login'
   placeholder:string =""
   persondata:any={}
   error=""
@@ -27,8 +27,9 @@ export class LoginComponent implements OnInit {
       console.log(this.persondata);
       axios.post(this.url,this.persondata).then((res)=>{
         console.log(res)
-        if(res.data.msg ==="Logged in!"){
-          this.router.navigate(["home",res.data.user.id])
+        if(typeof res.data === 'object'){
+          localStorage.setItem('user',JSON.stringify(res.data))
+          this.router.navigate(["home"])
          }else{
           this.router.navigate(["login"])
           this.error=res.data
