@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-categories-home',
@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./categories-home.component.css']
 })
 export class CategoriesHomeComponent implements OnInit {
+@Input() master:any ;
+question=[]
+  constructor() {
 
-  constructor() { }
+
+  }
 
   ngOnInit(): void {
+    
   }
 
 }

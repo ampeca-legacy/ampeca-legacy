@@ -1,7 +1,5 @@
 <p>categories-home works!</p>
 <ul class="cards">
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
+    <app-card *ngFor="let elem of master" [origin]="elem"></app-card>
+    
 </ul>

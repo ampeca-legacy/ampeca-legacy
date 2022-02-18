@@ -3,10 +3,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
 <div class="wrapper">
     <div class="box">
-        <form id='searchBox'>
-         <input placeholder='Search here...' type='text' (input)="onChange($event,'search')"/>
-         <input (click)="search()" id='submitBtn' type='submit' value='Search'/>
-        </form>
+        
         <span id='icon'><img src="square.png" alt=""></span>
         <nav id='navArea'>
          <ul class='navArea' *ngIf="auth=== false">
