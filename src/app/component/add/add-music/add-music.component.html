@@ -1,15 +1,8 @@
-<div>
-    <form>
-        <label>title</label>
-        <input type="text" name="title" placeholder="title">
-        <label>description</label>
-        <textarea name="description" placeholder="description" ></textarea>
-        <input type="file" (input)="onchange($event)">
-    </form>
-    <div>
-        <select>
-            <option value="">album name</option>
-        </select>
+<div class="login">
+    <div class="form">
+        <input  (input)="onKey($event,'name_music')" type="text" name="name_album" placeholder="album name">
+        <textarea (input)="onKey($event,'descr_music')"name="descr_album"></textarea>
+        <input (input)="onchange($event)" type="file">
+        <button (click)="upload($event)">add album</button>
     </div>
-    <button (click)="upload()">add</button>
 </div>

@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   font-family: "Lato", sans-serif;
 }
 
@@ -8,16 +7,13 @@ body {
   padding: 0;
   width: 200px;
   background-color: #f1f1f1;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-  right: 10px;
+  height: 1300px;
+  /* position: ; */
 }
 
 .sidebar a {
   display: block;
   color: black;
-  padding: 16px;
   text-decoration: none;
 }
  
@@ -33,7 +29,6 @@ body {
 
 div.content {
   margin-left: 200px;
-  padding: 1px 16px;
   height: 1000px;
 }
 

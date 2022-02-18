@@ -1,22 +1,4 @@
-<!-- <div>
-    <nav class="flex">
-        <div class="inputnav"> 
-            <input type="search" placeholder="search" (input)="onChange($event,'search')">
-            <li><a routerLink="" (click)="search()" routerLinkActive="active">search</a></li>
-        </div>
-        <ul *ngIf="auth=== false">
-            <li><a routerLink="../login" routerLinkActive="active">Login</a></li>
-            <li><a routerLink="../signup" routerLinkActive="active">signup</a></li>
-        </ul> -->
-        <!-- *ngIf="auth=== true" -->
-        <!-- <ul >
-            <li><a routerLink="../profile" routerLinkActive="active">Profile</a></li>
-            <li><a routerLink="" routerLinkActive="active">Logout</a></li>
-        </ul>
-    </nav>
-    
-   
-</div> -->
+
 
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
 <div class="wrapper">
@@ -33,6 +15,11 @@
             <li id='sub-menu'></li>
             <li><a routerLink="../profile" routerLinkActive="active">Profile</a></li>
             <li><a routerLink="../signup" routerLinkActive="active">Logout</a></li>
+            <li><a routerLink="../home/" routerLinkActive="active" class="active">Home</a></li>
+            <li><a routerLink="../addmusic" routerLinkActive="active" >Add music</a></li>
+            <li><a routerLink="../addalbum" routerLinkActive="active" >Add Album</a></li>
+            <li><a routerLink="../playlist" routerLinkActive="active" >My PlayList</a></li>
+
         </ul>
       </nav>
     </div>
