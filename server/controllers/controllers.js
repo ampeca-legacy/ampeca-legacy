@@ -1,8 +1,8 @@
 var db = require("../DataBase/Connection.js");
-const {signupValidation, loginValidation} = require("./validation");
-const {validationResult} = require("express-validator");
+
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+
+
 
 const register = function (req, res) {
     var sql = 'SELECT * FROM user WHERE LOWER(email) = LOWER(?)'
@@ -13,22 +13,22 @@ const register = function (req, res) {
         } else {
             if (result.length) {
                 res.status(200).send("This user is already in use!");
-            } else 
+            } else
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
-                   var params={
-                     username:req.body.name,
-                     email: req.body.email,
-                     password:hash,
-                     last_login:req.body.date
-                   }
+                    var params = {
+                        username: req.body.name,
+                        email: req.body.email,
+                        password: hash,
+                        last_login: req.body.date
+                    }
                     db.query(`INSERT INTO user Set ? `
-                      , params ,(err, result) => {
-                        if (err) {
-                            throw err
-                        } else {
-                            res.status(201).send("The user has been registerd with us!")
-                        }
-                    })
+                        , params, (err, result) => {
+                            if (err) {
+                                throw err
+                            } else {
+                                res.status(201).send("The user has been registerd with us!")
+                            }
+                        })
                 })
         }
 
@@ -36,202 +36,151 @@ const register = function (req, res) {
 }
 
 
-const login = (loginValidation, (req, res, next) => {
-    db.query(`SELECT * FROM user WHERE email = ${
-        db.escape(req.body.email)
-    };`, (err, result) => { // user does not exists
+const login = (req, res, next) => {
+    params = req.body
+    sql = 'SELECT * FROM user WHERE email =?'
+    db.query(sql, [params.email], (err, result) => { // user does not exists
         if (err) {
-            return res.status(400).send({msg: err});
+            res.status(400).send(err);
+        } else if (!result.length) {
+            res.status(401).send("Email or password is incorrect!");
+        } else {
+            bcrypt.compare(params.password, result[0]["password"], (bErr, bResult) => { // wrong password
+                if (bErr) {
+                    res.status(401).send("Email or password is incorrect!");
+                }
+                if (bResult) {
+                    res.status(200).send("Logged in!", result[0]);
+                } else {
+                    res.status(401).send("Username or password is incorrect!");
+                }
+            })
         }
-        if (!result.length) {
-            return res.status(401).send( "Email or password is incorrect!");
-        }
-        // check password
-        bcrypt.compare(req.body.password, result[0]["password"], (bErr, bResult) => { // wrong password
-            if (bErr) {
-                return res.status(401).send( "Email or password is incorrect!");
-            }
-            if (bResult) {
-                const token = jwt.sign({
-                    id: result[0].id
-                }, "the-super-strong-secrect", {expiresIn: "1h"});
-                db.query(`UPDATE user SET last_login = now() WHERE id = '${
-                    result[0].id
-                }'`);
-                return res.status(200).send({msg: "Logged in!", token, user: result[0]});
-            }
-            return res.status(401).send( "Username or password is incorrect!");
-        });
-    });
-});
-const getuser = (signupValidation, (req, res, next) => {
-    if (!req.headers.authorization || !req.headers.authorization.startsWith("Bearer") || !req.headers.authorization.split(" ")[1]) {
-        return res.status(422).json({message: "Please provide the token"});
-    }
-    const theToken = req.headers.authorization.split(" ")[1];
-    const decoded = jwt.verify(theToken, "the-super-strong-secrect");
-    db.db.query("SELECT * FROM user where id=?", decoded.id, function (error, results, fields) {
-        if (error) 
-            throw error;
-        
-        return res.send({error: false, data: results[0], message: "Fetch Successfully."});
-    });
-});
-
-var db = require("../DataBase/Connection.js");
-const e = require("express");
-// testing
-const removefrompl = (req, res) => {
-    console.log(req.params, "fssfss", req.body);
-    var selsql = `SELECT songs FROM playlist WHERE id = ${
-        req.params["id"]
-    } `;
-    db.db.query(selsql, (err, result) => {
-        if (err) {
-            res.send("err1");
-        }
-
-        var parse = JSON.parse(result[0]["songs"]);
-        // console.log(parse,"af")
-
-        for (var i = 0; i < parse.length; i++) {
-            if (parse[i] === req.body["idsong"]) {
-                parse.splice(i, 1);
-            }
-        }
-        parse = JSON.stringify(parse);
-        var upsql = `UPDATE playlist SET songs = '${parse}' WHERE id = '${
-            req.params["id"]
-        }' `;
-        db.db.query(upsql, (err, resl) => {
-            if (err) {
-                res.send("err2");
-            }
-            res.send(resl);
-        });
     });
 };
+
+// const getuser =  (req, res, next) => {
+//     if (!req.headers.authorization || !req.headers.authorization.startsWith("Bearer") || !req.headers.authorization.split(" ")[1]) {
+//         return res.status(422).json({ message: "Please provide the token" });
+//     }
+//     const theToken = req.headers.authorization.split(" ")[1];
+//     const decoded = jwt.verify(theToken, "the-super-strong-secrect");
+//     db.db.query("SELECT * FROM user where id=?", decoded.id, function (error, results, fields) {
+//         if (error)
+//             throw error;
+
+//         return res.send({ error: false, data: results[0], message: "Fetch Successfully." });
+//     });
+// }
+
+
+// testing
+const removefrompl = (req, res) => {
+    id = req.params.id_playlist
+
+    var sql = `delete FROM playlist WHERE id_playlist = ?`;
+    db.query(sql, id, (err, result) => {
+        if (err) {
+            res.send("err1");
+        } else {
+            res.send(result);
+        }
+    });
+
+};
 const updateplname = (req, res) => {
-    var selsql = `UPDATE playlist SET name = ?  WHERE id = ?  `;
-    db.db.query(selsql, [
-        req.body["name"], req.body["id"]
-    ], (err, result) => {
+    var sql = `UPDATE playlist SET name = ?  WHERE id = ?  `;
+    db.query(sql, [req.body["name_playlist"], req.body["id_playlist"]], (err, result) => {
         if (err) {
             console.log(err);
         }
-        console.log(result);
-        res.send(result);
+        else {
+            res.send(result);
+        }
+
     });
 };
 
 // Getting The Array of Song for Specfic user
-const GetPlaylistSong = function (User, callback) {
-    db.db.query(`SELECT songs FROM playlist WHERE id = '${User}'`, (err, rez) => {
-        if (err) 
-            callback(null);
-         else 
-            callback(rez);
-        
+const GetPlaylistSong = function (req, res) {
+    db.db.query(`SELECT songs FROM playlist WHERE id = ?`, req.body.id_playlist, (err, rez) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(rez);
+        }
     });
 };
 
 // Posting a Song in Playlist Is like Updating the array in the Playlist table For Specfic user
-var PostSongs = function (Data, callback) {
-    db.db.query(`select * from playlist where id ='${
-        Data["user"]
-    }' `, (err, rez) => {
-        if (err) 
-            callback("err in finding the user");
-         else {
-            var x = [];
-            var arr = [];
-            arr.push(JSON.parse(Data["songs"]));
-            console.log(rez, " rez", rez["0"]["songs"]);
-            x = JSON.parse(rez["0"]["songs"]);
 
-            arr = arr.concat(x);
-            var arr1 = [];
-            arr = JSON.stringify(arr);
-            console.log(arr, "this is the Array ");
-            db.db.query(`UPDATE playlist SET songs = '${arr}' WHERE id ='${
-                Data["user"]
-            }' `, (err, rez) => {
-                if (rez.affectedRows == 0) {
-                    db.db.query(`INSERT INTO playlist (id , songs) VALUES ('${
-                        Data["user"]
-                    }' , '${arr}')`, (err1, rez1) => {
-                        if (err1 !== null) 
-                            callback("Err Ha");
-                         else 
-                            callback("Check Data Inserted");
-                        
-                    });
-                } else {
-                    if (err !== null) 
-                        callback("err Hapaned");
-                     else 
-                        callback("Check Database");
-                    
-                }
-            });
+var PostMusic = function (req, res) {
+    var lecture = "INSERT INTO music SET ?"
+    var params = {
+        url_music: req.body.url_music,
+        name_music: req.body.name_music,
+        id_user: req.body.id_user,
+        id_album: req.body.id_album,
+        descr_music: req.body.descr_music
+    }
+    db.query(lecture, params, (err, results) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(results)
         }
-    });
-};
-const GetSong = function (User, callback) {
-    console.log(User, "this is the user ");
-    db.db.query(`SELECT * FROM songs WHERE id = '${User}'`, (err, rez) => {
-        console.log(err, " this is The Data ", rez);
-        if (err) 
-            callback(null);
-         else 
-            callback(rez);
-        
+    })
+}
+
+var GetSong = function (req, res) {
+    db.query("SELECT * FROM song where id_music=?", req.params.id_music, (err, items, fields) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(items);
+        }
     });
 };
 
 var GetAllSong = function (req, res) {
-    db.db.query("SELECT * FROM songs ", (err, rez) => {
-        if (err) 
+    db.db.query("SELECT * FROM music ", (err, rez) => {
+        if (err)
             res.send(err);
-         else 
+        else
             res.send(rez);
-        
+
     });
 };
 
-const updateUser = (req, res) => { // const params=req.params.id
-    console.log(req.params["id"], " that is the params");
-    console.log(req.body, " that is the body ");
+// const updateUser = (req, res) => { // const params=req.params.id
+//     console.log(req.params["id"], " that is the params");
+//     console.log(req.body, " that is the body ");
 
-    const up = `UPDATE user SET username= '${
-        req.body["username"]
-    }' , email= '${
-        req.body["email"]
-    }' , password='${
-        req.body["password"]
-    }' WHERE id='${
-        req.params["id"]
-    }'`;
-    console.log(req.params.id);
-    // var sql = 'UPDATE `users` SET `furniture` = ' + `concat(furniture, '${lol}')` + 'WHERE `user` = ?'
-    db.db.query(up, (err, data) => {
-        console.log(data);
-        if (err) {
-            console.log("error in update");
-            res.send(err);
-        } else {
-            console.log("data updated");
-            res.send(data);
-        }
-    });
-};
+//     const up = `UPDATE user SET username= '${req.body["username"]
+//         }' , email= '${req.body["email"]
+//         }' , password='${req.body["password"]
+//         }' WHERE id='${req.params["id"]
+//         }'`;
+//     console.log(req.params.id);
+//     // var sql = 'UPDATE `users` SET `furniture` = ' + `concat(furniture, '${lol}')` + 'WHERE `user` = ?'
+//     db.db.query(up, (err, data) => {
+//         console.log(data);
+//         if (err) {
+//             console.log("error in update");
+//             res.send(err);
+//         } else {
+//             console.log("data updated");
+//             res.send(data);
+//         }
+//     });
+// };
 
 // Posting a Song in Playlist Is like Updating the array in the Playlist table For Specfic user
 
 const getUserInfo = (req, res) => { // const id=req.params.id
-    const userInfo = `SELECT * FROM user WHERE id = '${
-        req.params["id"]
-    }'`;
+    const userInfo = `SELECT * FROM user WHERE id = '${req.params["id_user"]
+        }'`;
     db.db.query(userInfo, (err, data) => {
         if (err) {
             res.send(err);
@@ -242,26 +191,77 @@ const getUserInfo = (req, res) => { // const id=req.params.id
 };
 var GetAllSong = function (req, res) {
     db.db.query("SELECT * FROM songs ", (err, rez) => {
-        if (err) 
+        if (err)
             res.send(err);
-         else 
+        else
             res.send(rez);
-        
+
     });
 };
+var getMusicFromAlbum = (req, res) => {
+    var params = req.params.id_album
+    var sql = 'select * from music where id_album=?'
+    db.query(sql, params, (err, rez) => {
+        if (err)
+            res.send(err);
+        else
+            res.send(rez);
+
+    });
+
+}
+
+var getGenders=(req,res)=>{
+    
+    var sql = 'select gender from album'
+    db.query(sql, (err, rez) => {
+        if (err)
+            res.send(err);
+        else{
+            var obj={}
+            for (var i=0;i<rez.length;i++){
+                if (obj[rez[i]])
+                obj[rez[i]]++
+                else{
+                    obj[rez[i]]=1
+                }
+            }
+            var array=[]
+            for (var key in obj){
+                array.push(key)
+            }
+            res.send(array);
+        }
+            
+
+    });
+}
+var getAlbumsByGender=(req,res)=>{
+    var params=req.params.gender
+    var sql='select * from album where gender_album=?'
+    db.query(sql,params,(err,res)=>{
+        if (err)
+        res.send(err);
+        else
+        res.send(res)
+    })
+}
 
 module.exports = {
+    getMusicFromAlbum,
+    getGenders,
+    getAlbumsByGender,
     removefrompl,
     GetPlaylistSong,
     updateplname,
-    PostSongs,
+    PostMusic,
     register,
     GetAllSong,
     login,
     GetAllSong,
-    getuser,
+    // getuser,
     GetSong,
-    updateUser,
+    // updateUser,
     getUserInfo,
     GetAllSong
 };

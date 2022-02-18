@@ -6,11 +6,10 @@ CREATE TABLE user (
     username varchar (200),
     email varchar(200) , 
     password varchar(225),
-    last_login datetime,
-    image_user varchar,
-    UNIQUE KEY email (email),
-    PRIMARY KEY (id)
-)ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; ; 
+    last_login varchar(10),
+    image_user varchar(500),
+    PRIMARY KEY (id_user)
+); 
 CREATE TABLE album(
     id_album Int NOT NULL AUTO_INCREMENT ,
     gender_album varchar(500),
@@ -26,7 +25,7 @@ CREATE TABLE  music (
     id_music int AUTO_INCREMENT ,
     url_music varchar(1000) ,
     name_music varchar(50) ,
-    id_music Int  ,
+    id_user Int  ,
     id_album Int , 
     descr_music varchar(500),
     PRIMARY KEY(id_music),
@@ -34,10 +33,10 @@ CREATE TABLE  music (
     FOREIGN  KEY (id_album) REFERENCES album(id_album)
 ) ; 
 CREATE TABLE  playlist(
-    id_playlist int ,
+    id_playlist int AUTO_INCREMENT ,
     id_user int,
     name_playlist varchar(50), 
-    FOREIGN key(id_user)REFERENCES user(id_user)
+    FOREIGN key(id_user)REFERENCES user(id_user),
     PRIMARY KEY (id_playlist)
 );
 
