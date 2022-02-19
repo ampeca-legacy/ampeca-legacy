@@ -1,20 +1,24 @@
-<p>album works!</p>
-<div>
+
+<div class="album-body">
     <div>
         <div>
            <div>
-            <img src="">
+            <img class="img" src="{{album[0].cover_album}}">
            </div>
-           <h2>album name</h2>
-           <p>artist name</p>
+           <h2>{{album[0].name_album}}</h2>
+           <p>{{album[0].username}}</p>
+           
         </div>
         <ul>
-            
+            <li *ngFor="let elem of album" (click)="clickon(elem.url_music)">{{elem.name_music}}</li>
         </ul>
         <div>
-            <audio controls>
-                <source src="">
+            <audio controls loop autoplay>
+                <source src="{{url}}">
             </audio>
+            
+            <!-- <iframe src="{{url}}" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe> -->
+            <!-- <app-play [url]="url"></app-play> -->
         </div>
     </div>
 </div>
