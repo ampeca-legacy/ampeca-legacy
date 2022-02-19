@@ -14,4 +14,7 @@ export class CardComponent implements OnInit {
   log() {
     console.log('foo')
   }
+  onclick(n:number){
+      localStorage.setItem('id_album',JSON.stringify(n))
+  }
 }
