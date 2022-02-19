@@ -9,7 +9,7 @@ import {HomeComponent} from './component/home/home.component';
 import {AddMusicComponent} from './component/add/add-music/add-music.component';
 import { AddAlbumComponent } from './component/add/add-album/add-album.component';
 import {PlaylistComponent} from './component/playlist/playlist.component';
-
+import { AlbumComponent } from './component/album/album.component';
 import { CategoryComponent } from './component/category/category.component';
 
 const routes: Routes = [
@@ -20,7 +20,8 @@ const routes: Routes = [
   {path:'signup', component:SignupComponent},
   {path:'category', component:CategoryComponent},
   {path:'addmusic', component:AddMusicComponent},
-  {path:'addalbum',component:AddAlbumComponent}
+  {path:'addalbum',component:AddAlbumComponent},
+  {path :'album',component:AlbumComponent}
 
 ];
 

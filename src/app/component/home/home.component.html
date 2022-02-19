@@ -1,13 +1,13 @@
 <div class="home">
     <!-- <app-sidenavbar></app-sidenavbar> -->
 
-    <p>home works!</p>
+    <H1>AMPECA</H1>
     <form id='searchBox'>
         <input placeholder='Search here...' type='text' (input)="onChange($event,'search')" />
         <input (click)="search($event)" id='submitBtn' type='submit' value='Search' />
     </form>
     <div  >
-        <app-categories-home  *ngFor="let elem of mainarray" [master]="elem" ></app-categories-home>
+        <app-categories-home  *ngFor="let elem of mainarray" [master]="elem" >{{elem[0].category_album}}</app-categories-home>
     </div>
     
     <!-- <app-categories-home></app-categories-home> -->

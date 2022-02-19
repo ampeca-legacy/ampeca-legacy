@@ -2,7 +2,7 @@ var db = require("../DataBase/Connection.js");
 
 var getMusicFromAlbum = (req, res) => {
     var params = req.params.id_album
-    var sql = 'select * from music where id_album=?'
+    var sql = 'select m.*,a.*,u.* from music m inner join album a on m.id_album=a.id_album inner join user u on u.id_user=a.id_user where a.id_album=?'
     db.query(sql, [params], (err, rez) => {
         if (err)
             res.send(err);

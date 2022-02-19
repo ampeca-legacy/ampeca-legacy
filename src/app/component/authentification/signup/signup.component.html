@@ -7,7 +7,7 @@
         <div class="user-details">
           <div class="input-box">
             <span class="details">Full Name</span>
-            <input type="text" id="name " name="name" (input)="onKey($event,'name')"  placeholder="Enter your name" required>
+            <input type="text" id="name " name="username" (input)="onKey($event,'username')"  placeholder="Enter your name" required>
           </div>
           <!-- <div class="input-box">
             <span class="details">Username</span>
@@ -51,7 +51,7 @@
           </div>
         </div> -->
         <input type="file" (input)="onchange($event)" name="file">
-        <input type="date" (input)="onKey($event,'date')" name="date">
+        <input type="date" (input)="onKey($event,'last_login')" name="date">
         <div class="button">
             <input type="submit" value="Register" (click)="on($event)"  routerLinkActive="active" />
             <div>{{error}}</div>
